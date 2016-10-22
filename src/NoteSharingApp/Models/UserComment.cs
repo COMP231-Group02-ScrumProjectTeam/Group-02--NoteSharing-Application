@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NoteShare.Models
+namespace NoteSharingApp.Models
 {
     public class UserComment
     {

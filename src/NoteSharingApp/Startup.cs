@@ -40,6 +40,9 @@ namespace NoteSharingApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+
+            var connection = @"Server=SABRINA-LAPTOP\SQLEXPRESS;Database=NoteShareDB;Trusted_Connection=True;";
+            services.AddDbContext<NoteSharingContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 

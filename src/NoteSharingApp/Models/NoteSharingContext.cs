@@ -2,7 +2,7 @@
 
 
 
-namespace NoteShare.Models
+namespace NoteSharingApp.Models
 {
     public class NoteSharingContext: DbContext
     {
