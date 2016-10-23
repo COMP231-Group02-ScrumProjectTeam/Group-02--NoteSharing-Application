@@ -8,9 +8,10 @@ using NoteSharingApp.Models;
 namespace NoteSharingApp.Migrations
 {
     [DbContext(typeof(NoteSharingContext))]
-    partial class NoteSharingContextModelSnapshot : ModelSnapshot
+    [Migration("20161023043334_2ndUpdate")]
+    partial class _2ndUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
