@@ -19,14 +19,14 @@ namespace NoteSharingApp.Models
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Occupation { get; set; }
-        public string College_org { get; set; }
+        public string College { get; set; }
         public string Enrollement_year { get; set; }
         public string Semester { get; set; }
         public string Program_field { get; set; }
-        public string EmailId { get; set; }
+        public string User_name { get; set; }
+        public string Password { get; set; }
 
-       
+
         public virtual ICollection<Document> Documents { get; set; }
        
         public virtual ICollection<UserComment> UserComments { get; set; }
