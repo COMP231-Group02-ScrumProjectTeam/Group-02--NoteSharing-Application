@@ -1,0 +1,55 @@
+@model NoteSharingApp.Models.UserComment
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>UserComment</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Comment" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DocumentID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="DocumentID" class ="form-control" asp-items="ViewBag.DocumentID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="UserID" class ="form-control" asp-items="ViewBag.UserID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Vote" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Vote" class="form-control" />
+                <span asp-validation-for="Vote" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

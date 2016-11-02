@@ -1,0 +1,50 @@
+﻿@model dynamic
+
+
+
+
+<!-- extend the parent layout named section -->
+@{
+    //string _pathAndQuery = Request.Url.PathAndQuery;
+    string _controllerAndAction = "/" + ViewContext.RouteData.Values["Controller"].ToString() + "/" + ViewContext.RouteData.Values["Action"].ToString();
+    string _controller = ViewContext.RouteData.Values["Controller"].ToString();
+    string _action = ViewContext.RouteData.Values["Action"].ToString();
+    //string query=Url.query
+
+
+    <nav class="left-vertical">
+        <ul>
+            @*@if (_controllerAndAction == "/Home/Index")
+            {*@
+                <li>
+                    <a href="#">Users +</a>
+                    <ul>
+                        <li>@Html.ActionLink("List", "Index", "Users", null, "")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Users", null, "")</li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Documents +</a>
+                    <ul>
+                        <li>@Html.ActionLink("List", "Index", "Documents", null, "")</li>
+                        <li>@Html.ActionLink("Upload", "PostNotes", "Documents", null, "")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">User Comments +</a>
+                    <ul>
+                        <li>@Html.ActionLink("List", "Index", "UserComments", null, "")</li>
+                        <li>@Html.ActionLink("Create", "Create", "UserComments", null, "")</li>
+                      
+                        
+                    </ul>
+                </li>
+
+            @*}*@
+            
+      
+        </ul>
+    </nav>
+
+}

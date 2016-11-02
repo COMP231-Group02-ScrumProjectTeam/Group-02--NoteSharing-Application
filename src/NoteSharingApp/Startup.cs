@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using NoteSharingApp.Data;
 using NoteSharingApp.Models;
 using NoteSharingApp.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace NoteSharingApp
 {
@@ -40,6 +41,9 @@ namespace NoteSharingApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+
+            var connection = @"Server=SABRINA-LAPTOP\SQLEXPRESS;Database=NoteShareAppDB;Trusted_Connection=True;";
+            services.AddDbContext<NoteSharingContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -76,6 +80,15 @@ namespace NoteSharingApp
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = "MyCookieMiddlewareInstance",
+                LoginPath = new PathString("/Users/Login/"),
+                AccessDeniedPath = new PathString("/Users/Forbidden/"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
 
             app.UseMvc(routes =>
             {
