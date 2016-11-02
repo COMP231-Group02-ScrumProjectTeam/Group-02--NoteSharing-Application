@@ -1,0 +1,82 @@
+@model NoteSharingApp.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Register New User</h2>
+
+<form asp-action="Register">
+    <div class="form-horizontal">
+        <h4>User</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>       
+        <div class="form-group">
+            <label asp-for="College" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="College" class="form-control" />
+                <span asp-validation-for="College" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Enrol_year" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Enrol_year" class="form-control" />
+                <span asp-validation-for="Enrol_year" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Program" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Program" class="form-control" />
+                <span asp-validation-for="Program" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Semester" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Semester" class="form-control" />
+                <span asp-validation-for="Semester" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="User_name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="User_name" class="form-control" />
+                <span asp-validation-for="User_name" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Register" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+   
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

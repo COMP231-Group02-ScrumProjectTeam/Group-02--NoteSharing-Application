@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using NoteSharingApp.Data;
 using NoteSharingApp.Models;
 using NoteSharingApp.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace NoteSharingApp
 {
@@ -79,6 +80,15 @@ namespace NoteSharingApp
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = "MyCookieMiddlewareInstance",
+                LoginPath = new PathString("/Users/Login/"),
+                AccessDeniedPath = new PathString("/Users/Forbidden/"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
 
             app.UseMvc(routes =>
             {

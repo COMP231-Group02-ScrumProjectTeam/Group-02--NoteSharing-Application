@@ -1,0 +1,63 @@
+﻿@model NoteSharingApp.Models.Document
+
+@{
+    ViewData["Title"] = "Post Note";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+<div class="container">
+    <div class="col-xs-3 col-sm-3 col-md-3 profile-image" style="margin-top : 15px !important;">
+        <img src="http://img.timeinc.net/time/daily/2010/1011/poy_nomination_agassi.jpg" />
+    </div>
+    <div class="col-xs-9 col-sm-9 col-md-9">
+        <div class="col-xs-9 col-sm-9 col-md-9">
+            <div>
+                <h3>Name: @ViewBag.Name</h3>
+            </div>
+            <div><h3>School: @ViewBag.School</h3></div>
+            <div><h3>Enrollment Year: @ViewBag.EnrollmentYear</h3></div>
+            <div><h3>Current Semester: @ViewBag.CurrentSemester</h3></div>
+        </div>
+       
+</div>
+    <div class="container">
+
+        <div class="col-xs-6 col-sm-6 col-md-6" style="margin-top : 15px !important;">
+
+            <form asp-action="PostNotes" asp-controller="Documents" class="form-inline" method="post" enctype="multipart/form-data">
+
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="UserID" value=@ViewBag.UserID/>
+                @*<div class="form-group">
+                    <label asp-for="User" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <select asp-for="UserID" class="form-control" asp-items="ViewBag.UserID"></select>
+                    </div>
+                </div>*@
+
+
+
+                <div class="form-group">
+
+                    <label class="custom-file-upload">
+                        <input type="file" name="files" />
+                        Custom Upload <span class="glyphicon glyphicon-upload"></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+
+                    <input class="btn btn-default btn-lg btn-primary upload-btn" type="submit" value="Upload" />
+                </div>
+            </form>
+        </div>
+    </div>
+  
+</div>
+
