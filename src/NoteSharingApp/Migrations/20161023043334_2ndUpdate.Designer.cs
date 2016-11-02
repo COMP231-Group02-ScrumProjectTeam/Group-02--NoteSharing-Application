@@ -8,9 +8,10 @@ using NoteSharingApp.Models;
 namespace NoteSharingApp.Migrations
 {
     [DbContext(typeof(NoteSharingContext))]
-    partial class NoteSharingContextModelSnapshot : ModelSnapshot
+    [Migration("20161023043334_2ndUpdate")]
+    partial class _2ndUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -63,7 +64,9 @@ namespace NoteSharingApp.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("College");
+                    b.Property<string>("College_org");
+
+                    b.Property<string>("EmailId");
 
                     b.Property<string>("Enrollement_year");
 
@@ -71,13 +74,11 @@ namespace NoteSharingApp.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Occupation");
 
                     b.Property<string>("Program_field");
 
                     b.Property<string>("Semester");
-
-                    b.Property<string>("User_name");
 
                     b.HasKey("ID");
 

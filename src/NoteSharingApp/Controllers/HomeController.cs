@@ -7,11 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 using System.IO;
-using Microsoft.AspNetCore.Authorization;
 
 namespace NoteSharingApp.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private IHostingEnvironment hostingEnv;
@@ -39,17 +37,10 @@ namespace NoteSharingApp.Controllers
             return View();
         }
 
-        public IActionResult user()
-        {
-            ViewData["Message"] = "User Profile";
-
-
-            return View();
-        }
         public IActionResult PostNotesView()
         {
             ViewData["Message"] = "Your post notes page.";
-
+            
 
             return View();
         }
@@ -80,7 +71,7 @@ namespace NoteSharingApp.Controllers
         {
             return View();
         }
-
+     
     }
 }
 
