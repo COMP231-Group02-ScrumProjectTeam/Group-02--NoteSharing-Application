@@ -1,0 +1,70 @@
+@model NoteSharingApp.Models.Document
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Document</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="DocumentTypeID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="DocumentTypeID" class ="form-control" asp-items="ViewBag.DocumentTypeID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Extension" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Extension" class="form-control" />
+                <span asp-validation-for="Extension" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FileName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FileName" class="form-control" />
+                <span asp-validation-for="FileName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UploadDateTimeOffset" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="UploadDateTimeOffset" class="form-control" />
+                <span asp-validation-for="UploadDateTimeOffset" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Size" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger" />
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <label asp-for="UserID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="UserID" class ="form-control" asp-items="ViewBag.UserID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

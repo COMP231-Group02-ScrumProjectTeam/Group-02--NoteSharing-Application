@@ -1,9 +1,11 @@
-﻿<!DOCTYPE html>
+﻿
+@using System.Security.Claims;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - NoteSharingApp</title>
+    <title>@ViewData["Title"] - Note Sharing Application</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -26,26 +28,47 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">NoteSharingApp</a>
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Users" asp-action="Register">User Register</a></li>
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <li><a style="text-align:right;color:red" asp-area="" asp-controller="Users" asp-action="Logout">Welcome @User.Identity.Name, Logout</a></li>
+
+                    }
                 </ul>
-                @await Html.PartialAsync("_LoginPartial")
+
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2016 - NoteSharingApp</p>
-        </footer>
-    </div>
+    <section style="width:90%; margin: auto;padding: 10px;display:flex">
+        <div style="float:left;width: 20%;">
+            <nav>
 
+
+                @{
+
+                    Html.RenderPartial("_DynamicNav");
+                }
+            </nav>
+        </div>
+
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; 2016 - NoteSharingApp</p>
+            </footer>
+        </div>
+
+    </section>
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -62,7 +85,6 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @RenderSection("scripts", required: false)
 </body>
 </html>

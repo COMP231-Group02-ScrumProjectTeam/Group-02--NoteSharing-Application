@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "Post Note";
+}
+
+<div class="container">
+    <div class="col-xs-3 col-sm-3 col-md-3 profile-image" style="margin-top : 15px !important;">
+        <img src="http://img.timeinc.net/time/daily/2010/1011/poy_nomination_agassi.jpg" />
+    </div>
+    <div class="col-xs-9 col-sm-9 col-md-9">
+        <div>
+            <h3>Name:John</h3>
+        </div>
+        <div><h3>School:Centennial</h3></div>
+        <div><h3>Enrollment Year:2016</h3></div>
+        <div><h3>Current Semester:2</h3></div>
+    </div>
+</div>
+<div class="container">
+
+    <div class="col-xs-6 col-sm-6 col-md-6" style="margin-top : 15px !important;">
+
+        <form asp-action="PostNotesView" asp-controller="Home" class="form-inline" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+
+                <label class="custom-file-upload">
+                    <input type="file" name="files"/>
+                    Custom Upload <span class="glyphicon glyphicon-upload"></span>
+                </label>
+            </div>
+
+            <div class="form-group">
+
+                <input class="btn btn-default btn-lg btn-primary upload-btn" type="submit" value="Upload" />
+            </div>
+        </form>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+        <div>
+            <h2 style="text-align:center;">Upload History</h2>
+        </div>
+        <div>
+            <h3>Recent History</h3>
+            <a href="">Introduction to Ruby on Rails</a>
+            <br />
+            <a href="">Multithreading in Java</a><br />
+            <a href="">Merge Sort Notes</a>
+
+
+
+        </div>
+
+    </div>
+</div>
+
