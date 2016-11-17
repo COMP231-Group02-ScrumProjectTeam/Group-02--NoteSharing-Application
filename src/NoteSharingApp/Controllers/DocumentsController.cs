@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using MimeKit;
+using Microsoft.AspNetCore.StaticFiles;
 
 /// <summary>
 /// 
@@ -33,7 +35,8 @@ namespace NoteSharingApp.Controllers
         private IEnumerable<UserForDisplay> GetUserList()
         {
             return _context.Users.Select(u => new UserForDisplay
-            { ID = u.ID,
+            {
+                ID = u.ID,
                 DisplayName = u.FirstName +
               ((!string.IsNullOrWhiteSpace(u.FirstName) && !string.IsNullOrWhiteSpace(u.LastName))
                ? " " : "") + u.LastName
@@ -44,13 +47,14 @@ namespace NoteSharingApp.Controllers
         }
 
         [Authorize]
-        public IActionResult PostNotes()
+        public IActionResult PostNotes(string UploadedFiles)
         {
+
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
 
             //var UserID = claims.Where(c => c.Type== "UserID");
-            var UserID=claims.Where(c => c.Type == "UserID")
+            var UserID = claims.Where(c => c.Type == "UserID")
                    .Select(c => c.Value).SingleOrDefault();
 
             int ID = int.Parse(UserID);
@@ -63,6 +67,9 @@ namespace NoteSharingApp.Controllers
             ViewBag.EnrollmentYear = loginUser.Enrol_year;
             ViewBag.CurrentSemester = loginUser.Semester;
 
+            IEnumerable<Document> Top10UserDocumentList = _context.Documents.Where(d => d.UserID == ID).OrderByDescending(d => d.UploadDateTimeOffset).Take(10);
+            ViewBag.Top10UserDocumentList = Top10UserDocumentList;
+            ViewBag.UploadedFiles = UploadedFiles;
             ViewData["Message"] = "Your post notes page.";
 
 
@@ -73,28 +80,36 @@ namespace NoteSharingApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> PostNotes([Bind("ID,DocumentTypeID,Extension,FileName,ModifiedData,Size,Title,UserID")] Document document,IList<IFormFile> files)
+        public async Task<IActionResult> PostNotes([Bind("ID,DocumentTypeID,Extension,FileName,ModifiedData,Size,Title,UserID")] Document document, IList<IFormFile> files)
         {
             long size = 0;
             if (ModelState.IsValid)
             {
                 foreach (var file in files)
-            {
-                
+                {
+
                     Document docForSave = new Document();
-                    docForSave.DocumentType = file.ContentType;
-                        docForSave.UserID = document.UserID;
-                var filename = ContentDispositionHeaderValue
-                                .Parse(file.ContentDisposition)
-                                .FileName
-                                .Trim('"');
+
+                    var filename = ContentDispositionHeaderValue
+                                    .Parse(file.ContentDisposition)
+                                    .FileName
+                                    .Trim('"');
                     var modificationDate = ContentDispositionHeaderValue
                         .Parse(file.ContentDisposition).ModificationDate;
 
                     string extension = Path.GetExtension(filename);
 
+                    var filenameWithFullPath = hostingEnv.WebRootPath + $@"\{filename}";
 
+                    using (FileStream fs = System.IO.File.Create(filenameWithFullPath))
+                    {
+                        file.CopyTo(fs);
+                        fs.Flush();
+                    }
 
+                    size += file.Length;
+                    docForSave.DocumentType = file.ContentType;
+                    docForSave.UserID = document.UserID;
 
                     docForSave.FileName = filename;
 
@@ -105,24 +120,38 @@ namespace NoteSharingApp.Controllers
 
                     _context.Add(docForSave);
                     await _context.SaveChangesAsync();
-                    filename = hostingEnv.WebRootPath + $@"\{filename}";
-                    size += file.Length;
-                    using (FileStream fs = System.IO.File.Create(filename))
-                    {
-                        file.CopyTo(fs);
-                        fs.Flush();
-                    }
-                  
+
+
                 }
-                ViewBag.Message = $"{files.Count} file(s) / {size} bytes uploaded successfully!";
-                return RedirectToAction("Index");
+                string UploadedFiles = $"{files.Count} file(s) / {size} bytes uploaded successfully!";
+                //  return RedirectToAction("Index");
+                return RedirectToAction("PostNotes", new { UploadedFiles = UploadedFiles });
 
             }
 
             ViewData["UserID"] = new SelectList(GetUserList(), "ID", "DisplayName");
 
             return View(document);
-           // return View();
+            // return View();
+        }
+
+        public ActionResult DownloadAttachment(int ID)
+        {
+            // Find user by passed id
+            // Student student = db.Students.FirstOrDefault(s => s.Id == studentId);
+
+            var filename = _context.Documents.FirstOrDefault(d => d.ID == ID).FileName;
+            var filenameWithFullPath = hostingEnv.WebRootPath + $@"\{filename}";
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filenameWithFullPath);
+
+            string contentType;
+            new FileExtensionContentTypeProvider().TryGetContentType(filename, out contentType);
+            contentType = contentType ?? "application/octet-stream";
+
+            return File(fileBytes, contentType, filename);
+
+
         }
 
 
@@ -232,7 +261,7 @@ namespace NoteSharingApp.Controllers
                 }
                 return RedirectToAction("Index");
             }
-          
+
             ViewData["UserID"] = new SelectList(_context.Users, "ID", "ID", document.UserID);
             return View(document);
         }
