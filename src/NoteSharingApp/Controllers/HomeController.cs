@@ -9,6 +9,7 @@ using Microsoft.Net.Http.Headers;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
 
+//this is home controller
 namespace NoteSharingApp.Controllers
 {
     [Authorize]
