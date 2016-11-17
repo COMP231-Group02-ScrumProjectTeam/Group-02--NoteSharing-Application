@@ -23,8 +23,8 @@
             <div><h3>Enrollment Year: @ViewBag.EnrollmentYear</h3></div>
             <div><h3>Current Semester: @ViewBag.CurrentSemester</h3></div>
         </div>
-       
-</div>
+
+    </div>
     <div class="container">
 
         <div class="col-xs-6 col-sm-6 col-md-6" style="margin-top : 15px !important;">
@@ -33,13 +33,13 @@
 
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="UserID" value=@ViewBag.UserID/>
+                <input type="hidden" asp-for="UserID" value=@ViewBag.UserID />
                 @*<div class="form-group">
-                    <label asp-for="User" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <select asp-for="UserID" class="form-control" asp-items="ViewBag.UserID"></select>
-                    </div>
-                </div>*@
+                        <label asp-for="User" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="UserID" class="form-control" asp-items="ViewBag.UserID"></select>
+                        </div>
+                    </div>*@
 
 
 
@@ -58,6 +58,81 @@
             </form>
         </div>
     </div>
-  
-</div>
+    @if (ViewBag.UploadedFiles != null)
+    {
+        <div class="col-xs-10 col-sm-10 col-md-10" style="color:red">
+            @Html.Label((string)ViewBag.UploadedFiles)
+        </div>
+    }
 
+    <div class="col-xs-6 col-sm-6 col-md-6">
+        <div>
+            <h2 style="text-align:left;">Recent Upload History</h2>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.User_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Extension)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FileName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UploadDateTimeOffset)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Size)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var document in ViewBag.Top10UserDocumentList)
+                {
+
+                    <tr>
+                        <td>
+                            <a asp-action="DownloadAttachment" asp-route-id="@document.ID">Download</a>
+                        </td>
+
+                        <td>
+                            @document.User.User_name
+                        </td>
+                        <td>
+                            @document.Extension
+                        </td>
+                        <td>
+                            @document.FileName
+                        </td>
+                        <td>
+                            @document.UploadDateTimeOffset
+                        </td>
+                        <td>
+                            @document.Size
+                        </td>
+
+
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        @*<a href="">Introduction to Ruby on Rails</a>
+            <a href="">Multithreading in Java</a>
+            <br />
+            <a href="">Merge Sort Notes</a>*@
+
+
+
+    </div>
+
+
+
+</div>
