@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using NoteSharingApp.Models;
 using NoteSharingApp.Models.AccountViewModels;
 using NoteSharingApp.Services;
-
+//Account Controller Comment
 namespace NoteSharingApp.Controllers
 {
     [Authorize]
