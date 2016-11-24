@@ -48,18 +48,24 @@ namespace NoteSharingApp.Controllers
         }
 
         [Authorize]
-        public IActionResult PostNotes(string UploadedFiles)
+        public IActionResult PostNotes(string UploadedFiles, int? UserIDPara)
         {
+            int? ID = null;
+            if (UserIDPara == null)
+            {
+                var identity = (ClaimsIdentity)User.Identity;
+                IEnumerable<Claim> claims = identity.Claims;
 
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
+                //var UserID = claims.Where(c => c.Type== "UserID");
+                var UserID = claims.Where(c => c.Type == "UserID")
+                       .Select(c => c.Value).SingleOrDefault();
 
-            //var UserID = claims.Where(c => c.Type== "UserID");
-            var UserID = claims.Where(c => c.Type == "UserID")
-                   .Select(c => c.Value).SingleOrDefault();
-
-            int ID = int.Parse(UserID);
-
+                ID = int.Parse(UserID);
+            }
+            else
+            {
+                ID = UserIDPara;
+            }
             var loginUser = _context.Users.Where(u => u.ID == ID).FirstOrDefault();
 
             ViewBag.UserID = loginUser.ID;
@@ -159,6 +165,14 @@ namespace NoteSharingApp.Controllers
         // GET: Documents
         [Authorize]
         public async Task<IActionResult> Index()
+        {
+            var noteSharingContext = _context.Documents.Include(d => d.User);
+            return View(await noteSharingContext.ToListAsync());
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> UserDocIndex()
         {
             var noteSharingContext = _context.Documents.Include(d => d.User);
             return View(await noteSharingContext.ToListAsync());

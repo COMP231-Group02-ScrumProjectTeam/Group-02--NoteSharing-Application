@@ -1,0 +1,43 @@
+﻿@model IEnumerable<NoteSharingApp.Models.Document>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <a asp-action="PostNotes">Document Upload and Save</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User.User_name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.User.User_name, "PostNotes", "Documents", new { UserIDPara = item.UserID }, "")
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
