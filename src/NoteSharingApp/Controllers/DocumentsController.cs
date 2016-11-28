@@ -141,7 +141,7 @@ namespace NoteSharingApp.Controllers
             return View(document);
             // return View();
         }
-
+        //download attachment
         public ActionResult DownloadAttachment(int ID)
         {
             // Find user by passed id
