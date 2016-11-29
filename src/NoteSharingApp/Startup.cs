@@ -41,14 +41,13 @@ namespace NoteSharingApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-
-            var connection = @"Server=SABRINA-LAPTOP\SQLEXPRESS;Database=NoteShareAppDB;Trusted_Connection=True;";
-            services.AddDbContext<NoteSharingContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+                            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                //.AddEntityFrameworkStores<NoteSharingContext>()
+
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
