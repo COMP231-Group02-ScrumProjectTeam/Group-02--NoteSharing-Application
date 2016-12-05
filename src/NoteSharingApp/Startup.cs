@@ -38,11 +38,14 @@ namespace NoteSharingApp
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
 
-            var connection = @"Server=SABRINA-LAPTOP\SQLEXPRESS;Database=NoteShareAppDB;Trusted_Connection=True;";
+            //var connection = @"Server=SABRINA-LAPTOP\SQLEXPRESS;Database=NoteShareAppDB;Trusted_Connection=True;";
+            var connection = @"Server=tcp:notesharingapp.database.windows.net,1433;Database=NoteSharingAppDB;Persist Security Info=False;User ID=user;Password=Password1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
             services.AddDbContext<NoteSharingContext>(options => options.UseSqlServer(connection));
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
