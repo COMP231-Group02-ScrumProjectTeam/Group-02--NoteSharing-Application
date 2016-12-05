@@ -170,6 +170,8 @@ namespace NoteSharingApp.Controllers
             return View(await noteSharingContext.ToListAsync());
         }
 
+      
+
 
         [Authorize]
         public async Task<IActionResult> UserDocIndex()
