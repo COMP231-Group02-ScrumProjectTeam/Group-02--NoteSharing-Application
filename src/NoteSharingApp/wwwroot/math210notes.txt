@@ -1,0 +1,19 @@
+to invert a 2x2 matrix r1[ab]r2[cd] change it into r1[d -b]r2[-c a]and multiply by 1/ad-bc
+to invert a 3x3 matrix take the 3x3 matrix and put it next to a reduced echlon matrix(REM) tht looks like r1[1 0 0|0 1 0|0 0 1] then reduce the 3x3 matrix while applying the changes to the REM next to it
+to determine values for a vector in Rn to be parallel to another vector solve for each var individually 
+determine all scalar(linear combination prob) create a matrix where xyz is each their own column and the variables are the last column
+component form of vector vector(x,y,...)|terminal pt= initial point +vector(vector is drawn from the head of the initial pt)
+to finddeterminant by cofactorexpansion select each element of the matrix and find the the determinant of the elements tht arent in the same row and column. assuming[ab|cd]->ad-bc to find the determinant
+the norm of a vector is sqrt(x1^2+x2^2+...)| to find the unit vector divide the vector by it's norm
+linear combination is expressing a vector like --->(6,1,1)-6(1,0,0) 1(0,1,0) 1(0,0,1)
+distance between R^n-vectord=sqrt((v1-u1)^2+...)direction doesnt matter in distance
+dot product a dot b=ax *bx+ay*by(direction does matter so negative and positive)(only gives answer as a scalar)
+to find missing angle for dot product-adotb/|a|*|b|=cos
+when 2 vectors are at right angles to each other than the dot product is 0
+orthogonality-the relation of two lines at right angles to one another (perpendicularity)
+cross product gives u a vector answer
+a × b = |a| |b| sin(?) n n is a unit vector that is perpindicular to a and b
+or can be calculated this way
+cx = aybz - azby
+cy = azbx - axbz
+cz = axby - aybx
