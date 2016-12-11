@@ -170,9 +170,6 @@ namespace NoteSharingApp.Controllers
             return View(await noteSharingContext.ToListAsync());
         }
 
-      
-
-
         [Authorize]
         public async Task<IActionResult> UserDocIndex()
         {
@@ -194,7 +191,7 @@ namespace NoteSharingApp.Controllers
             {
                 return NotFound();
             }
-
+            //ViewData["UserID"] = new SelectList(GetUserList(), "ID", "DisplayName");
             return View(document);
         }
 

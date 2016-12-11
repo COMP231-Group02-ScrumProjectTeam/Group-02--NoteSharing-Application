@@ -12,27 +12,29 @@
     //string query=Url.query
 
 
-    <nav class="left-vertical">
-        <ul>
+  
             @*@if (_controllerAndAction == "/Home/Index")
             {*@
-                <li>
+                <!-- <li>
                     <a href="#">Users +</a>
                     <ul>
                         <li>@Html.ActionLink("List", "Index", "Users", null, "")</li>
-                        <li>@Html.ActionLink("Register", "Register", "Users", null, "")</li>
-
+                        <!--<li>@Html.ActionLink("Register", "Register", "Users", null, "")</li>-->
+            
+            <!--
                     </ul>
-                </li>
-                <li>
-                    <a href="#">Documents +</a>
+                </li> -->
+
+
+                <!--<li>
+                    <a href="#">Documents </a>
                     <ul>
                         <li>@Html.ActionLink("List", "Index", "Documents", null, "")</li>
                         <li>@Html.ActionLink("Upload", "PostNotes", "Documents", null, "")</li>
-                        <li>@Html.ActionLink("User Document List ", "UserDocIndex", "Documents", null, "")</li>
-                    </ul>
-                </li>
-                <li>
+                        <!--<li>@Html.ActionLink("User Document List ", "UserDocIndex", "Documents", null, "")</li>-->
+                    <!--</ul>
+                </li>-->
+                <!--<li>
                     <a href="#">User Comments +</a>
                     <ul>
                         <li>@Html.ActionLink("List", "Index", "UserComments", null, "")</li>
@@ -40,12 +42,13 @@
                       
                         
                     </ul>
-                </li>
+                </li>-->
+            <li>@Html.ActionLink("Document", "Index", "Documents", null, "")</li>
+            
 
             @*}*@
             
       
-        </ul>
-    </nav>
+  
 
 }
