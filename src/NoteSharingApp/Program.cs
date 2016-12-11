@@ -20,5 +20,6 @@ namespace NoteSharingApp
 
             host.Run();
         }
+    
     }
 }
