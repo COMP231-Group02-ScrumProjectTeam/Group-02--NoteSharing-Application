@@ -4,6 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Note Sharing Application</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
@@ -63,9 +64,11 @@
             <ul class="nav navbar-nav">
                 <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                 <!--<li><a asp-area="" asp-controller="Users" asp-action="Register">User Register</a></li>-->
-                @{
-
-                    Html.RenderPartial("_DynamicNav");
+                @if (User.Identity.IsAuthenticated)
+                {
+                   
+                        Html.RenderPartial("_DynamicNav");
+                   
                 }
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -83,7 +86,7 @@
         </div>
     </div>
     <section style="width:90%; margin: auto;padding: 10px;display:flex">
-        <div style="float:left;width: 20%;">
+        
             <nav>
 
 

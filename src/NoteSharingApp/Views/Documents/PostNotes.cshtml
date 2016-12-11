@@ -46,7 +46,7 @@
                 <div class="form-group">
 
                     <label class="custom-file-upload">
-                        <input type="file" name="files" />
+                        <input type="file" name="files" accept=".txt"/>
                         Custom Upload <span class="glyphicon glyphicon-upload"></span>
                     </label>
                 </div>
@@ -72,8 +72,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>
-                    </th>
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.User.User_name)
                     </th>
@@ -84,11 +83,9 @@
                         @Html.DisplayNameFor(model => model.FileName)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.UploadDateTimeOffset)
+                        &nbsp;
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Size)
-                    </th>
+             
 
                     <th></th>
                 </tr>
@@ -99,9 +96,7 @@
 
                     <tr>
                         @*download attachment call*@
-                        <td>
-                            <a asp-action="DownloadAttachment" asp-route-id="@document.ID">Download</a>
-                        </td>
+                 
 
                         <td>
                             @document.User.User_name
@@ -113,10 +108,7 @@
                             @document.FileName
                         </td>
                         <td>
-                            @document.UploadDateTimeOffset
-                        </td>
-                        <td>
-                            @document.Size
+                            <a asp-action="DownloadAttachment" asp-route-id="@document.ID"><span class="glyphicon glyphicon-download-alt"></span></a>
                         </td>
 
 
