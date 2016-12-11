@@ -101,7 +101,10 @@ namespace NoteSharingApp.Controllers
                     });
                         
                         _logger.LogInformation(1, "User logged in.");
-
+                        if(returnUrl=="/")
+                        {
+                            returnUrl = "/Documents/PostNotes";
+                        }
                         return RedirectToLocal(returnUrl);
                     }
                     catch(Exception ex)

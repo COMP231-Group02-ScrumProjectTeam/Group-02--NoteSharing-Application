@@ -20,7 +20,10 @@
                     <a href="#">Users +</a>
                     <ul>
                         <li>@Html.ActionLink("List", "Index", "Users", null, "")</li>
+                    @if (!User.Identity.IsAuthenticated)
+                     {
                         <li>@Html.ActionLink("Register", "Register", "Users", null, "")</li>
+                     }
 
                     </ul>
                 </li>
