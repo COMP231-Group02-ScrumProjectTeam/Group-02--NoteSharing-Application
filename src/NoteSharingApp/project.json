@@ -77,11 +77,15 @@
 
   "publishOptions": {
     "include": [
-      "wwwroot",
-      "Views",
-      "Areas/**/Views",
-      "appsettings.json",
-      "web.config"
+        "wwwroot",
+        "Views",
+        "Areas/**/Views",
+        "appsettings.json",
+        "config.json",
+        "config.*.json",
+        "web.config",
+        "project.json",
+        "project.*.json"
     ]
   },
 
