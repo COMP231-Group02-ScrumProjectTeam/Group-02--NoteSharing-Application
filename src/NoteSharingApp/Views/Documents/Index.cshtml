@@ -5,11 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<!--<h2>Index</h2>-->
+<h1>Document List</h1>
 
 <p>
     @*<a asp-action="Create">Create New</a>*@
-    <a asp-action="PostNotes">Document Upload and Save</a>
+    <h3><a asp-action="PostNotes">Want to upload notes. Click Here!</a></h3>
 </p>
 <table class="table">
     <thead>
@@ -23,12 +24,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.FileName)
             </th>
-            <th>
+            <!--<th>
                 @Html.DisplayNameFor(model => model.UploadDateTimeOffset)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Size)
-            </th>
+            </th>-->
           
             <th></th>
         </tr>
@@ -45,17 +46,32 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FileName)
             </td>
-            <td>
+           <!-- <td>
                 @Html.DisplayFor(modelItem => item.UploadDateTimeOffset)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Size)
-            </td>
+            </td>-->
            
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                
+                <!--<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |-->
+                <!--<a asp-action="Details" asp-route-id="@item.ID">
+                    <span class="glyphicon glyphicon-file"></span>
+                </a> |
+                <a asp-action ="Delete" asp-route-id ="@item.ID" >
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a> |
+                <a asp-action="DownloadAttachment" asp-route-id="@item.ID"><span class="glyphicon glyphicon-download-alt"></span></a> -->
+               
+                    <a href="~/@item.FileName" target="_blank"><span class="glyphicon glyphicon-file"></a>
+                    @if (@User.Identity.Name == item.User.User_name)
+                    {
+                        <a href="/Documents/Delete/@item.ID"><span class="glyphicon glyphicon-trash"></a>
+                    }
+                    <a href="/Documents/DownloadAttachment/@item.ID"><span class="glyphicon glyphicon-download-alt"></a>
+               
+                
             </td>
         </tr>
 }
