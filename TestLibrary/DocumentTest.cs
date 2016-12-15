@@ -27,5 +27,21 @@ namespace TestLibrary
             Assert.AreEqual(taskId, 1);
             return true;
         }
+        [TestMethod]
+        public void PostNotesView()
+        {
+            var controller = new DocumentsController();
+            var result = controller.PostNotes("Notes", 1) as ViewResult;
+            Assert.AreEqual("Notes", result.ViewName);
+
+        }
+        [TestMethod]
+        public void PostNotesViewInt()
+        {
+            var controller = new DocumentsController();
+            var result = controller.PostNotes(1, 1) as ViewResult;
+            Assert.AreEqual(1, result.ViewName);
+
+        }
     }
 }
